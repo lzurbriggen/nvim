@@ -18,7 +18,7 @@ If you experience any errors while trying to install kickstart, run `:checkhealt
 
 -- TODO: include opts.lua after we moved our stuff to lua/opts.lua
 -- require("opts")
-
+require 'neovide'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -252,6 +252,7 @@ require('lazy').setup({
       },
     },
   },
+  { 'lambdalisue/vim-suda' },
 
   -- NOTE: Plugins can specify dependencies.
   --
