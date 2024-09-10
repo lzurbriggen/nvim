@@ -26,7 +26,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -182,7 +182,33 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    config = function()
+      local neogit = require 'neogit'
+      neogit.setup {}
+    end,
+  },
+  -- {
+  --   'nvim-telescope/telescope-file-browser.nvim',
+  --   dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+  --   config = function()
+  --     vim.keymap.set('n', '<space>fb', ':Telescope file_browser<CR>')
+  --   end,
+  -- },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -201,6 +227,7 @@ require('lazy').setup({
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    lazy = true,
     opts = {
       icons = {
         -- set icon mappings to true if you have a Nerd Font
@@ -831,8 +858,7 @@ require('lazy').setup({
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
-  { -- Collection of various small independent plugins/modules
+  {
     'echasnovski/mini.nvim',
     config = function()
       -- Better Around/Inside textobjects
@@ -844,7 +870,7 @@ require('lazy').setup({
       require('mini.ai').setup { n_lines = 500 }
 
       require('mini.git').setup()
-
+      require('mini.icons').setup()
       -- local animate = require 'mini.animate'
       -- animate.setup {
       --   scroll = {
